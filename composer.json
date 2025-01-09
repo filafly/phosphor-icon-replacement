@@ -1,0 +1,31 @@
+{
+  "name": "filafly/phosphor-icon-replacement",
+  "description": "Replace the default Filament icons with Phosphor icons.",
+  "homepage": "https://filafly.com/packages/phosphor-icon-replacement",
+  "license": "proprietary",
+  "authors": [
+    {
+      "role": "Developer",
+      "name": "Nolan Nordlund",
+      "email": "nolan@filafly.com",
+      "homepage": "https://www.filafly.com/"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Filafly\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "codeat3/blade-phosphor-icons": "^2.2",
+    "filament/filament": "^3.2.3",
+    "illuminate/support": "*",
+    "spatie/laravel-package-tools": "^1.9"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  }
+}
