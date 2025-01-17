@@ -19,7 +19,7 @@ composer require filafly/phosphor-icon-replacement
 Secondly, add the plugin to any panels you wish:
 
 ```php
-    ->plugin(\Filafly\PhosphorIconReplacement::make())
+->plugin(\Filafly\PhosphorIconReplacement::make())
 ```
 
 ## Styles
