@@ -1,8 +1,16 @@
 {
   "name": "filafly/phosphor-icon-replacement",
   "description": "Replace the default Filament icons with Phosphor icons.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "Laravel",
+    "Filament",
+    "icons",
+    "Phosphor",
+    "replace"
+  ],
   "homepage": "https://filafly.com/packages/phosphor-icon-replacement",
-  "license": "proprietary",
   "authors": [
     {
       "role": "Developer",
