@@ -214,9 +214,9 @@ class PhosphorIconReplacement implements Plugin
         return $this;
     }
 
-    public function duotone(): static
+    public function bold(): static
     {
-        self::$style = '-duotone';
+        self::$style = '-bold';
 
         return $this;
     }
@@ -228,9 +228,9 @@ class PhosphorIconReplacement implements Plugin
         return $this;
     }
 
-    public function bold(): static
+    public function duotone(): static
     {
-        self::$style = '-bold';
+        self::$style = '-duotone';
 
         return $this;
     }
