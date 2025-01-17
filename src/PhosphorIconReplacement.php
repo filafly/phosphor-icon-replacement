@@ -10,11 +10,6 @@ use Illuminate\Support\HtmlString;
 class PhosphorIconReplacement implements Plugin
 {
     private static ?string $style = null;
-
-    public function getId(): string
-    {
-        return 'phosphor-icon-replacement';
-    }
     
     public function register(Panel $panel): void
     {
@@ -29,6 +24,16 @@ class PhosphorIconReplacement implements Plugin
     public static function make(): static
     {
         return app(static::class);
+    }
+
+    public function getId(): string
+    {
+        return 'phosphor-icon-replacement';
+    }
+
+    public static function get(): static
+    {
+        return filament(app(static::class)->getId());
     }
 
     public static function configure(): void
