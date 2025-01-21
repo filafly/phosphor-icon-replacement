@@ -10,7 +10,9 @@ use Illuminate\Support\HtmlString;
 class PhosphorIconReplacement implements Plugin
 {
     private static ?string $style = null;
-    
+
+    private static array $overrideStyles = [];
+
     public function register(Panel $panel): void
     {
         //
@@ -34,6 +36,21 @@ class PhosphorIconReplacement implements Plugin
     public static function get(): static
     {
         return filament(app(static::class)->getId());
+    }
+
+    public static function overrideStyleForAlias(array|string $keys, string $style): static
+    {
+        $keys = is_array($keys) ? $keys : [$keys];
+
+        foreach ($keys as $key) {
+            if ($style === 'regular') {
+                static::$overrideStyles[$key] = '';
+            } else {
+                static::$overrideStyles[$key] = '-'.$style;
+            }
+        }
+
+        return new static;
     }
 
     public static function configure(): void
@@ -188,8 +205,17 @@ class PhosphorIconReplacement implements Plugin
 
         FilamentIcon::register(
             $iconMap
-            ->mapWithKeys(fn ($icon, $key) => in_array($key, $doNotStyle) ? [$key => $icon] : [$key => $icon . self::$style])
-            ->toArray()
+                ->mapWithKeys(function ($icon, $key) use ($doNotStyle) {
+                    if (in_array($key, $doNotStyle)) {
+                        return [$key => $icon];
+                    }
+
+                    $style = static::$overrideStyles[$key] ?? static::$style;
+                    $style ??= '';
+
+                    return [$key => $icon.$style];
+                })
+                ->toArray()
         );
     }
 
