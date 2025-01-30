@@ -1,5 +1,5 @@
-<p align="center">
-    <img src="https://filafly.com/images/phosphor-icon-replacement.webp" alt="Banner" style="width: 100%; max-width: 800px;" />
+<p class="filament-hidden" align="center">
+    <img src="images/filafly-phosphor-icon-replacement.jpg" alt="Banner" style="width: 100%; max-width: 800px;" />
 </p>
 
 Tired of Heroicons? Quickly swap out all icons used by the Filament framework with [Phosphor icons](https://phosphoricons.com). Include support for 6 different icon styles.
@@ -21,6 +21,9 @@ Secondly, add the plugin to any panels you wish:
 ```php
 ->plugin(\Filafly\PhosphorIconReplacement::make())
 ```
+
+## Screenshots
+![Compare icon sets](images/phosphor-icon-replacement-examples.jpg?raw=true "Compare icon sets")
 
 ## Usage
 ### Setting a default style
