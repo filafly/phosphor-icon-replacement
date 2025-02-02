@@ -40,7 +40,10 @@ PhosphorIconReplacement::make()->duotone()
 If no style is explicitly chosen, regular will be used.
 
 ### Override Specific Icons
-If you’d like a global style, but need to override certain icons to use a different style, you can use a [Filament Icon Alias](https://filamentphp.com/docs/3.x/support/icons#available-icon-aliases) with the `overrideStyleForAlias` method. This method works with either a single icon key (string) or multiple icon keys (array).
+If you need to override certain icons to use a different style, you can use either icon aliases or direct icon names.
+
+#### Using Icon Aliases
+Use the `overrideStyleForAlias` method with a [Filament Icon Alias](https://filamentphp.com/docs/3.x/support/icons#available-icon-aliases). This method works with either a single icon key (string) or multiple icon keys (array).
 
 ```php
 // Override a single icon key
@@ -50,6 +53,21 @@ PhosphorIconReplacement::overrideStyleForAlias('tables::actions.filter', 'thin')
 PhosphorIconReplacement::overrideStyleForAlias([
     'tables::actions.filter',
     'actions::delete-action',
+], 'thin');
+```
+
+#### Using Icon Names
+Use the `overrideStyleForIcon` method with the actual Phosphor icon name. Like the alias method, this works with either a single icon name or multiple names.
+
+```php
+// Override a single icon
+PhosphorIconReplacement::overrideStyleForIcon('phosphor-user', 'thin');
+
+// Override multiple icons at once
+PhosphorIconReplacement::overrideStyleForIcon([
+    'phosphor-user',
+    'phosphor-caret-up',
+    'phosphor-bell',
 ], 'thin');
 ```
 

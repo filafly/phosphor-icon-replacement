@@ -5,13 +5,14 @@ namespace Filafly;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Facades\FilamentIcon;
-use Illuminate\Support\HtmlString;
 
 class PhosphorIconReplacement implements Plugin
 {
     private static ?string $style = null;
 
-    private static array $overrideStyles = [];
+    private static array $overriddenAliases = [];
+
+    private static array $overriddenIcons = [];
 
     public function register(Panel $panel): void
     {
@@ -38,17 +39,26 @@ class PhosphorIconReplacement implements Plugin
         return filament(app(static::class)->getId());
     }
 
+    private static function setOverriddenStyle(array|string $items, string $style, string $type = 'aliases'): void
+    {
+        $items = is_array($items) ? $items : [$items];
+        $storage = $type === 'aliases' ? 'overriddenAliases' : 'overriddenIcons';
+
+        foreach ($items as $item) {
+            static::${$storage}[$item] = $style === 'regular' ? '' : '-'.$style;
+        }
+    }
+
     public static function overrideStyleForAlias(array|string $keys, string $style): static
     {
-        $keys = is_array($keys) ? $keys : [$keys];
+        static::setOverriddenStyle($keys, $style, 'aliases');
 
-        foreach ($keys as $key) {
-            if ($style === 'regular') {
-                static::$overrideStyles[$key] = '';
-            } else {
-                static::$overrideStyles[$key] = '-'.$style;
-            }
-        }
+        return new static;
+    }
+
+    public static function overrideStyleForIcon(array|string $icons, string $style): static
+    {
+        static::setOverriddenStyle($icons, $style, 'icons');
 
         return new static;
     }
@@ -184,8 +194,8 @@ class PhosphorIconReplacement implements Plugin
             'infolists::components.icon-entry.true' => 'phosphor-check-circle',
 
             'badge.delete-button' => 'phosphor-x',
-            'breadcrumbs.separator' => new HtmlString('/'),
-            'breadcrumbs.separator.rtl' => new HtmlString('\\'),
+            'breadcrumbs.separator' => 'phosphor-caret-right',
+            'breadcrumbs.separator.rtl' => 'phosphor-caret-left',
             'modal.close-button' => 'phosphor-x',
             'pagination.first-button' => 'phosphor-caret-double-left',
             'pagination.first-button.rtl' => 'phosphor-caret-double-right',
@@ -198,19 +208,12 @@ class PhosphorIconReplacement implements Plugin
             'section.collapse-button' => 'phosphor-caret-down',
         ]);
 
-        $doNotStyle = [
-            'breadcrumbs.separator',
-            'breadcrumbs.separator.rtl',
-        ];
-
         FilamentIcon::register(
             $iconMap
-                ->mapWithKeys(function ($icon, $key) use ($doNotStyle) {
-                    if (in_array($key, $doNotStyle)) {
-                        return [$key => $icon];
-                    }
-
-                    $style = static::$overrideStyles[$key] ?? static::$style;
+                ->mapWithKeys(function ($icon, $key) {
+                    $style = static::$overriddenAliases[$key]
+                        ?? static::$overriddenIcons[$icon]
+                        ?? static::$style;
                     $style ??= '';
 
                     return [$key => $icon.$style];
