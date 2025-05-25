@@ -2,6 +2,7 @@
   "name": "filafly/phosphor-icon-replacement",
   "description": "Replace the default Filament icons with Phosphor icons.",
   "type": "library",
+  "abandoned": "filafly/filament-phosphor-icons",
   "license": "MIT",
   "keywords": [
     "Laravel",
@@ -30,6 +31,9 @@
     "filament/filament": "^3.2.3",
     "illuminate/support": "*",
     "spatie/laravel-package-tools": "^1.9"
+  },
+  "suggest": {
+    "filafly/filament-phosphor-icons": "DEPRECATED: Migrate to this actively maintained replacement package with improved architecture."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

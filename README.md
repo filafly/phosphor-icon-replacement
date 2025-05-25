@@ -2,6 +2,13 @@
     <img src="images/filafly-phosphor-icon-replacement.jpg" alt="Banner" style="width: 100%; max-width: 800px;" />
 </p>
 
+> **⚠️ DEPRECATED:** This package has been deprecated and is no longer maintained. 
+> 
+> **Migration Required:** Please migrate to [filafly/filament-phosphor-icons](https://github.com/filafly/filament-phosphor-icons) which features:
+> - Improved core architecture
+> - Easier extensibility for community implementations
+> - Active maintenance and support
+
 Tired of Heroicons? Quickly swap out all icons used by the Filament framework with [Phosphor icons](https://phosphoricons.com). Include support for 6 different icon styles.
 
 ## Requirements
